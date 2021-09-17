@@ -15,78 +15,66 @@
 <link rel="stylesheet" href="/static/css/style.css" type="text/css">
 </head>
 <body>
-	<div id="wrap">
+	<div class="wrap">
+	
 		<c:import url="/WEB-INF/jsp/include/header.jsp" />
-		
-		<section>
-			<div class="d-flex align-items-center justify-content-center">
-				<div class="mr-5">
-				<img src="https://cdn.pixabay.com/photo/2016/08/30/03/19/watercolor-1629729_960_720.jpg" width="400px">
-				</div>
-				<div class="login-box">
-					<h1 class="text-center">로그인</h1>
-					<form id="loginForm">
-					<input type="text" id="loginIdInput" class="form-control" placeholder="아이디를 입력하세요">
-					<input type="password" id="passwordInput" class="form-control mt-3" placeholder="비밀번호를 입력하세요">
-					<input type="submit" id="loginBtn" class="btn btn-success btn-block mt-3" value="로그인">
-					</form>
-					<div class="text-right">
-					<a href="/user/signup_view">회원가입</a>
-					</div>
+		<section class="d-flex justify-content-center">
+			<div class="w-75 my-4">
+				<h1 class="text-center">타임라인 업로드</h1>
+				<textarea class="form-control mb-3" rows="5" id="contentInput"></textarea>
+				<!-- MIME text/html image/jpeg -->
+				<input type="file" accept="image/*" id="fileInput">
+				<div class="d-flex justify-content-between my-3">
+					<button type="button" class="btn btn-info">목록으로</button>
+					<button type="button" class="btn btn-success" id="saveBtn">저장</button>
 				</div>
 			</div>
 		
 		</section>
-	
 		<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+	
 	</div>
+	
 	<script>
 	$(document).ready(function() {
-		$("#loginForm").on("submit", function(e) {
-			e.preventDefault();
+		$("#saveBtn").on("click", function() {
+			var content = $("#contentInput").val().trim();
 			
-			var loginId = $("#loginIdInput").val();
-			var password = $("#passwordInput").val();
-			
-			if(loginId == null || loginId == "") {
-				alert("아이디를 입력해주세요");
+			if(content == null || content == "") {
+				alert("내용을 입력하세요");
 				return;
 			}
 			
-			if(password == null || password == "") {
-				alert("비밀번호를 입력해주세요");
-				return;
-			}
-			
+			var formData = new FormData();
+			formData.append("content", content);
+			formData.append("file", $("#fileInput")[0].files[0]);
 			
 			$.ajax({
+				enctype:"multipart/form-data", // 파일 업로드 필수
+				processData:false, //파일업로드 필수
+				contentType:false, //파일업로드 필수
 				type:"post",
-				url:"/user/sign_in",
-				data:{"loginId":loginId, "password":password},
+				url:"/post/create",
+				data:formData,
 				success:function(data) {
 					if(data.result == "success") {
-						alert("로그인 성공");
+						alert("삽입성공");
 					} else {
-						alert("아이디 비밀번호를 확인해주세요.");
+						alert("삽입실패");
 					}
 					
 				},
 				error:function(e) {
-					alert("error")
+					alert("error");
 				}
 				
 				
 			});
+			
 		});
-		
-		
-		
-	});
-	
-	
+	})
 	
 	</script>
-
 
 </body>
 </html>

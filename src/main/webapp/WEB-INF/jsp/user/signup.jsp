@@ -50,6 +50,15 @@
 		//중복 url 여부
 		var isDuplicate = true;
 		
+		//아이디에 입력이 있을 경우 다시 초기화
+		$("#loginIdInput").on("input", function() {
+			$("#duplicateDiv").addClass("d-none");
+			$("#noneDuplicateDiv").addClass("d-none");
+			isChecked = false;
+			isDuplicate = true;
+			
+		});
+		
 		$("#signupForm").on("submit", function(e) {
 			e.preventDefault();
 			
@@ -114,6 +123,7 @@
 			});
 		});
 		$("#isDuplicateBtn").on("click", function() {
+			//id에 대한 validation
 			var loginId = $("#loginIdInput").val();
 			
 			if(loginId == null || loginId =="") {
