@@ -67,6 +67,7 @@ public class UserRestController {
 		//있냐 없냐는 null로 구분할 수 있다.
 		if(user != null) {
 			HttpSession session = request.getSession();
+			session.setAttribute("userId", user.getId());
 			session.setAttribute("loginId", user.getLoginId());
 			session.setAttribute("userName", user.getName());
 			

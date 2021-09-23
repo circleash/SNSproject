@@ -1,11 +1,14 @@
 package com.circleash.SNS.post.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.circleash.SNS.common.FileManagerService;
 import com.circleash.SNS.post.dao.PostDAO;
+import com.circleash.SNS.post.model.Post;
 
 @Service
 public class PostBO {
@@ -25,10 +28,13 @@ public class PostBO {
 			}
 		}
 		
-		
-		
 		return postDAO.insertPost(userId, content, imagePath);
 	}
+	
+	public List<Post> getSnsList(int userId) {
+		return postDAO.selectSnsList(userId);
+	}
+	
 }
 
 

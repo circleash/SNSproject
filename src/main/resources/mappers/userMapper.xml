@@ -29,7 +29,7 @@
 		FROM
 			`user`
 		WHERE
-			`loginId` = #{loginId};
+			`loginId` = #{loginId}
  	
  	</select>
  	

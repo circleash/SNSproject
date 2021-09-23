@@ -11,6 +11,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>     
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="/static/css/style.css" type="text/css">
 </head>
@@ -23,9 +26,10 @@
 				<h1 class="text-center">타임라인 업로드</h1>
 				<textarea class="form-control mb-3" rows="5" id="contentInput"></textarea>
 				<!-- MIME text/html image/jpeg -->
-				<input type="file" accept="image/*" id="fileInput">
+				<a href="#" id="imageUploadBtn"><i class="bi bi-image"></i></a>
+				<input type="file" accept="image/*" id="fileInput" class="d-none">
 				<div class="d-flex justify-content-between my-3">
-					<button type="button" class="btn btn-info">목록으로</button>
+					<button type="button" class="btn btn-info">타임라인으로</button>
 					<button type="button" class="btn btn-success" id="saveBtn">저장</button>
 				</div>
 			</div>
@@ -37,6 +41,10 @@
 	
 	<script>
 	$(document).ready(function() {
+		$("#imageUploadBtn").on("click", function() {
+			$("#fileInput").click();
+		});
+		
 		$("#saveBtn").on("click", function() {
 			var content = $("#contentInput").val().trim();
 			

@@ -5,7 +5,7 @@
 			<h2 class="ml-3 pt-3">CircleClub</h2>
 			<c:if test="${not empty userName }">
 			<div class="mr-3">
-				${userName } [로그아웃]
+				${userName } <a href="/user/sign_out"> [로그아웃] </a>
 			</div>
 			</c:if>
 		</header>

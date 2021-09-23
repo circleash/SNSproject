@@ -22,6 +22,22 @@
  	
  	
  	</insert>
+ 	
+ 	<select id="selectSnsList" resultType="com.circleash.SNS.post.model.Post"
+ 	parameterType="int">
+ 		SELECT
+ 			`id`
+ 			, `userId`
+ 			, `content`
+ 			, `imagePath`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`post`
+ 		WHERE
+ 			`userId` = #{userId}
+ 		ORDER BY `id` DESC
+ 	</select>
  
  
  </mapper>
