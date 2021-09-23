@@ -24,7 +24,7 @@
 	<section>
 		<div class="d-flex justify-content-center">
 			<div class="w-50 my-5">
-				<h1 class="text-center">메모 리스트</h1>
+				<h1 class="text-center">타임라인</h1>
 				<c:forEach var="sns" items="${snsList }">
 				<div class="justify-content-center align-item-center">
 					<div>		
@@ -35,6 +35,10 @@
 					</div>
 					<div>
 						${sns.content }
+					</div>
+					<div class="d-flex mt-1 mb-4">
+						<button type="button" class="btn-small btn-success" id="likeBtn">좋아요</button>
+						<button type="button" class="btn-small btn-success" id="commentBtn">댓글달기</button>
 					</div>
 				</div>	
 				</c:forEach>
