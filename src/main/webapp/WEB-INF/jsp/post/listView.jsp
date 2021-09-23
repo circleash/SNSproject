@@ -17,39 +17,32 @@
 
 </head>
 <body>
-	<div class="wrap">
+	<div id="wrap">
 	
 	<c:import url="/WEB-INF/jsp/include/header.jsp" />
 	
 	<section>
 		<div class="d-flex justify-content-center">
-			<div class="w-75 my-5">
-				<h1 class="text-center">SNS 리스트</h1>
-					<table class="table text-center">
-						<thead>
-							<tr>
-								<th>No.</th>
-								<th>이미지</th>
-								<th>내용</th>
-							</tr>
-						
-						</thead>
-						<tbody>
-							<c:forEach var="sns" items="${snsList }">
-							<tr>
-								<td>${sns.id }</td>
-								<td><a href="/post/detail_view?id=${sns.id }"><img src="${sns.imagePath }"></a></td>
-								<td>${sns.content }</td>
-							</tr>
-							</c:forEach>
-						</tbody>
-						
-					</table>
-					<div class="text-right">
-					<a href="/post/create_view" class="btn btn-info">업로드 하러가기</a>
+			<div class="w-50 my-5">
+				<h1 class="text-center">메모 리스트</h1>
+				<c:forEach var="sns" items="${snsList }">
+				<div class="justify-content-center align-item-center">
+					<div>		
+						${sns.id }
 					</div>
-				</div>
-			</div>
+					<div>
+						<a href="/post/detail_view?id=${sns.id }"><img src="${sns.imagePath }" class="w-100"></a>
+					</div>
+					<div>
+						${sns.content }
+					</div>
+				</div>	
+				</c:forEach>
+			</div>		
+		</div>
+		<div class="text-right">
+						<a href="/post/create_view" class="btn btn-info">업로드 하러가기</a>
+		</div>
 	</section>
 	
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />

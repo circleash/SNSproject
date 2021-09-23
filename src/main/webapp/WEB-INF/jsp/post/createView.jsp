@@ -29,7 +29,7 @@
 				<a href="#" id="imageUploadBtn"><i class="bi bi-image"></i></a>
 				<input type="file" accept="image/*" id="fileInput" class="d-none">
 				<div class="d-flex justify-content-between my-3">
-					<button type="button" class="btn btn-info">타임라인으로</button>
+					<a href="/post/list_view" class="btn btn-info">타임라인으로</a>
 					<button type="button" class="btn btn-success" id="saveBtn">저장</button>
 				</div>
 			</div>
@@ -67,6 +67,7 @@
 				success:function(data) {
 					if(data.result == "success") {
 						alert("삽입성공");
+						location.href="/post/list_view"
 					} else {
 						alert("삽입실패");
 					}
