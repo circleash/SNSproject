@@ -46,6 +46,19 @@ public class PostRestController {
 		}
 		return result;
 	}
-			
+	//addPost와 비슷하게 해서 저장
+	//클라이언트로부터 userId 등등을 다 받아와서 코멘트를 데이터베이스에 저장하는게 목표.
+	//comment BO DAO 따로 만들어서 해볼것.
+	@PostMapping("/comment")
+	public Map<String, String> comment (
+			@RequestParam("content") String content
+			, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		int postId = (Integer)session.getAttribute("postId");
+		int userId = (Integer)session.getAttribute("userId");
+		String userName = (String)session.getAttribute("userName");
+		int count = postBO.addComment(postId, userId, userName, content);
+	}
 
 }
