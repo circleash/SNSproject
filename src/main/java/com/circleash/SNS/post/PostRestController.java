@@ -34,7 +34,8 @@ public class PostRestController {
 		//같은 사용자도 같은 파일 이름을 쓸수 있기 때문에 추가로 현재시간을 초로 나타내는걸 추가로 이름에 대한 문제 회피
 		HttpSession session = request.getSession();
 		int userId = (Integer)session.getAttribute("userId");
-		int count = postBO.addPost(userId, content, file);
+		String name = (String)session.getAttribute("userName");
+		int count = postBO.addPost(userId, name, content, file);
 		
 		Map<String, String> result = new HashMap<>();
 		

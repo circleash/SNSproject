@@ -8,12 +8,14 @@
  		INSERT INTO `post`
  		(
  			`userId`
+ 			, `name`
  			, `content`
  			, `imagePath`
  			, `createdAt`
  			, `updatedAt`
  			) VALUES (
  				#{userId}
+ 				,#{name}
  				,#{content}
  				,#{imagePath}
  				, now()
@@ -23,19 +25,17 @@
  	
  	</insert>
  	
- 	<select id="selectSnsList" resultType="com.circleash.SNS.post.model.Post"
- 	parameterType="int">
+ 	<select id="selectSnsList" resultType="com.circleash.SNS.post.model.Post">
  		SELECT
  			`id`
  			, `userId`
+ 			, `name`
  			, `content`
  			, `imagePath`
  			, `createdAt`
  			, `updatedAt`
  		FROM
  			`post`
- 		WHERE
- 			`userId` = #{userId}
  		ORDER BY `id` DESC
  	</select>
  

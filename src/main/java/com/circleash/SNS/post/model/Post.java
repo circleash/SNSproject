@@ -5,6 +5,7 @@ import java.util.Date;
 public class Post {
 	private int id;
 	private int userId;
+	private String name;
 	private String content;
 	private String imagePath;
 	private Date createdAt;
@@ -20,6 +21,12 @@ public class Post {
 	}
 	public void setUserId(int userId) {
 		this.userId = userId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getContent() {
 		return content;
@@ -45,6 +52,8 @@ public class Post {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+	
+	
 	
 	
 }

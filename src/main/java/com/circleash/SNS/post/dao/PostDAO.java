@@ -12,8 +12,9 @@ public interface PostDAO {
 	
 	public int insertPost(
 			@Param("userId") int userId
+			,@Param("name") String name
 			,@Param("content") String content
 			,@Param("imagePath") String imagePath);
 	
-	public List<Post> selectSnsList(@Param("userId") int userId);
+	public List<Post> selectSnsList();
 }

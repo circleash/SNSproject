@@ -26,9 +26,9 @@
 			<div class="w-50 my-5">
 				<h1 class="text-center">타임라인</h1>
 				<c:forEach var="sns" items="${snsList }">
-				<div class="justify-content-center align-item-center">
+				<div class="jumbotron jumbotron-fluid justify-content-center align-item-center">
 					<div>		
-						${sns.id }
+						${sns.name }
 					</div>
 					<div>
 						<a href="/post/detail_view?id=${sns.id }"><img src="${sns.imagePath }" class="w-100"></a>
@@ -36,9 +36,16 @@
 					<div>
 						${sns.content }
 					</div>
-					<div class="d-flex mt-1 mb-4">
-						<button type="button" class="btn-small btn-success" id="likeBtn">좋아요</button>
-						<button type="button" class="btn-small btn-success" id="commentBtn">댓글달기</button>
+					<div class="mt-1 mb-4">
+						<button type="button" class="btn btn-success" id="likeBtn">좋아요</button>
+					</div>
+					<div>
+					댓글
+					
+					</div>
+					<div class="d-flex">
+						<input type="text" id="commentInput-${sns.id }" class="form-control" placeholder="댓글을 작성하세요">
+						<button type="button" class="btn btn-success commentBtn" data-post-id="${sns.id }">작성</button>
 					</div>
 				</div>	
 				</c:forEach>
@@ -54,4 +61,19 @@
 	</div>
 
 </body>
+	<script>
+	$(document).ready(function() {
+		$(".commentBtn").on("click", function() {
+			var postId = $(this).data("post-id");
+			// postId, content
+			
+			//대응되는 input의 value
+			//ex) postId = 5;
+			//"#commentInput-5"
+			//매칭이 되는 방법
+			var content = $("#commentInput-" + postId).val();
+		})
+	});
+	
+	</script>
 </html>

@@ -16,7 +16,7 @@ public class PostBO {
 	@Autowired
 	private PostDAO postDAO;
 	
-	public int addPost(int userId, String content, MultipartFile file) {
+	public int addPost(int userId, String name, String content, MultipartFile file) {
 		
 		String imagePath = null;
 		// 파일이 있을 경우에만 저장 로직 진행
@@ -28,11 +28,11 @@ public class PostBO {
 			}
 		}
 		
-		return postDAO.insertPost(userId, content, imagePath);
+		return postDAO.insertPost(userId, name, content, imagePath);
 	}
 	
-	public List<Post> getSnsList(int userId) {
-		return postDAO.selectSnsList(userId);
+	public List<Post> getSnsList() {
+		return postDAO.selectSnsList();
 	}
 	
 }
