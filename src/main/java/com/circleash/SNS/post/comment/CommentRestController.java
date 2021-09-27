@@ -15,21 +15,22 @@ import org.springframework.web.bind.annotation.RestController;
 import com.circleash.SNS.post.comment.bo.CommentBO;
 
 @RestController
-@RequestMapping("/post")
+@RequestMapping("/post/comment")
 public class CommentRestController {
 	
 	@Autowired
 	private CommentBO commentBO;
 	
-	@PostMapping("/comment")
+	@PostMapping("/create")
 	public Map<String, String> comment (
-			@RequestParam("content") String content
+			@RequestParam("postId") int postId
+			,@RequestParam("content") String content
 			, HttpServletRequest request) {
 		
 		HttpSession session = request.getSession();
 		int userId = (Integer)session.getAttribute("userId");
 		String name = (String)session.getAttribute("userName");
-		int count = commentBO.addComment(userId, name, content);
+		int count = commentBO.addComment(postId, userId, name, content);
 		
 		Map<String, String> result = new HashMap<>();
 		if (count == 1) {
