@@ -27,9 +27,12 @@ public class PostController {
 	}
 	
 	@GetMapping("/list_view")
-	public String listView(Model model) {
+	public String listView(Model model
+			, HttpServletRequest request) {
 		//여기서는 session 필요없는듯 --> 선생님꺼 확인
-		
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		String name = (String)session.getAttribute("userName");
 		//객체화 시킨 userId를 쿼리를 통해 확인하고 List형태로 저장해주고
 		List<PostDetail> snsList = postBO.getSnsList();
 		

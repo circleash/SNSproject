@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.circleash.SNS.post.comment.model.Comment;
 
-
+// post와 comment 결합
 // DTO, VO라고 불림.
 public class PostDetail {
 	

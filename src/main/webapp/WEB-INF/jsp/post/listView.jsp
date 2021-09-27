@@ -26,15 +26,26 @@
 		<div class="d-flex justify-content-center">
 			<div class="col-lg-7">
 				<h1 class="text-center">타임라인</h1>
+				<!-- 피드 -->
 				<c:forEach var="PostDetail" items="${snsList }">
 				<div class="card border rounded mt-3">
-					<div>		
-						${PostDetail.post.name }
+				<!-- 타이틀 -->
+					<div class="d-flex justify-content-between p-2 border-bottom">
+						<div>
+							<img src="https://mblogthumb-phinf.pstatic.net/20150203_225/hkjwow_1422965971196EfkMV_JPEG/%C4%AB%C5%E5%C7%C1%BB%E7_31.jpg?type=w210" width="30">		
+							${PostDetail.post.name }
+						</div>
+						<div class="more-icon" >
+							<a class="text-dark moreBtn" href="#"> 
+								<i class="bi bi-three-dots-vertical"></i> 
+							</a>
+						</div>
 					</div>
+				<!-- 이미지  -->
 					<div>
 						<img src="${PostDetail.post.imagePath }" class="w-100 imageClick">
 					</div>
-					
+				<!-- 좋아요 -->
 					<div class="m-2">
 						<a href="#" class="likeBtn">
 					
@@ -43,11 +54,11 @@
 						</a>
 						<span class="middle-size ml-1"> 좋아요 11개 </span>
 					</div>
-					
+				<!-- content -->
 					<div class="middle-size m-2">
 						<b>${PostDetail.post.name }</b> ${PostDetail.post.content }
 					</div>
-					
+				<!-- 댓글 -->
 					<div class="mt-2">
 						<div class=" border-bottom m-2">
 							<!-- 댓글 타이틀 -->
@@ -55,15 +66,15 @@
 								댓글
 							</div>
 					</div>
-					
+					<!-- 댓글 -->
 					<div class="middle-size m-2">
-						
-						<div class="mt-1">
-							<b>바다</b> 혼자 좋은데 다니네
-						</div>
-						<div class="mt-1">
-							<b>하하</b> 좋아요!
-						</div>
+					
+						<!-- postDetail안에 commentList가 들어있음  -->
+						<c:forEach var="comment" items="${PostDetail.commentList }">
+							<div class="mt-1">
+								<b>${comment.userName }</b> ${comment.content }
+							</div>
+						</c:forEach>
 					
 					</div>
 					
@@ -105,7 +116,7 @@
 				data:{"postId":postId, "content":content},
 				success:function(data) {
 					if(data.result == "success") {
-						alert("댓글 작성 성공")
+						location.reload();
 					} else {
 						alert("댓글 작성 실패")
 					}

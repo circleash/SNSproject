@@ -14,8 +14,8 @@
  			, `createdAt`
  			, `updatedAt`
  			) VALUES (
- 				#{userId}
- 				, #{postId}
+ 				#{postId}
+ 				, #{userId} 
  				, #{name}
  				, #{content}
  				, now()
