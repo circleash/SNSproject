@@ -22,7 +22,7 @@
 				, now()
  			);
  	
- 	
+ 
  	</insert>
  	
  	<select id="selectSnsList" resultType="com.circleash.SNS.post.model.Post">

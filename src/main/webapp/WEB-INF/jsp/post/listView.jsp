@@ -46,14 +46,15 @@
 						<img src="${PostDetail.post.imagePath }" class="w-100 imageClick">
 					</div>
 				<!-- 좋아요 -->
+				
 					<div class="m-2">
-						<a href="#" class="likeBtn">
-					
-							<i class="bi bi-heart heart-icon text-dark"></i>	
-					
-						</a>
+					<a href="#" class="likeBtn" data-post-id="${PostDetail.post.id }">
+							<i class="bi bi-heart heart-icon text-dark"></i>
+					</a>
 						<span class="middle-size ml-1"> 좋아요 11개 </span>
 					</div>
+					
+					
 				<!-- content -->
 					<div class="middle-size m-2">
 						<b>${PostDetail.post.name }</b> ${PostDetail.post.content }
@@ -125,8 +126,39 @@
 				error:function(e) {
 					alert("error");
 				}
+				
 								
 			});
+		});
+	
+			$(".likeBtn").on("click", function(e) {
+				e.preventDefault();
+				<%--
+				#태그가 다른곳으로 가지 않게끔 처리
+				--%>
+				
+				var postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"get",
+					url:"/post/like",
+					data:{"postId":postId},
+					success:function(data) {
+						if(data.result == "success") {
+							alert("like 이용자 저장");
+						} else {
+							alert("이용자 저장 실패");
+						}
+						
+					},
+					error:function(e) {
+						alert("error");
+					}
+				
+			})
+			
+			
+			
 		});
 	});
 	

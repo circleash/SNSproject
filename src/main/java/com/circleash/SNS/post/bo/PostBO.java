@@ -55,14 +55,13 @@ public class PostBO {
 			postDetail.setPost(post);
 			postDetail.setCommentList(commentList);
 			
+			
 			postDetailList.add(postDetail);
-			
-			
+				
 		}
 		
 		return postDetailList;
 	}
-	
 	
 }
 

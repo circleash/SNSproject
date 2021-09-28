@@ -50,4 +50,5 @@ public class PostRestController {
 	//클라이언트로부터 userId 등등을 다 받아와서 코멘트를 데이터베이스에 저장하는게 목표.
 	//comment BO DAO 따로 만들어서 해볼것.
 	
+	
 }

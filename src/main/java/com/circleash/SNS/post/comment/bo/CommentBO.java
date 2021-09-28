@@ -19,7 +19,7 @@ public class CommentBO {
 	}
 	
 	//postId에 해당하는 댓글 리스트 가져오기
-	//이거하면서 model 생성
+	//이거하면서 jsp에서 사용할 model 생성
 	public List<Comment> getCommentListByPostId(int postId) {
 		return commentDAO.selectCommentListByPostId(postId);
 	}
