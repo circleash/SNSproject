@@ -48,10 +48,22 @@
 				<!-- 좋아요 -->
 				
 					<div class="m-2">
-					<a href="#" class="likeBtn" data-post-id="${PostDetail.post.id }">
-							<i class="bi bi-heart heart-icon text-dark"></i>
-					</a>
-						<span class="middle-size ml-1"> 좋아요 11개 </span>
+					
+							<c:choose>
+								<c:when test="${PostDetail.like }">
+								<a href="#" class="likeBtn" data-post-id="${PostDetail.post.id }">
+									<i class="bi bi-heart-fill heart-icon text-danger"></i>
+								</a>
+								</c:when>
+							<c:otherwise>
+								<a href="#" class="likeBtn" data-post-id="${PostDetail.post.id }">
+									<i class="bi bi-heart heart-icon text-dark"></i>	
+								</a>
+							</c:otherwise>
+							</c:choose>
+					<br>
+						<span>좋아요</span>
+						<span class="middle-size ml-1"> ${PostDetail.likeCount } 명이 좋아합니다. </span>
 					</div>
 					
 					
@@ -145,9 +157,9 @@
 					data:{"postId":postId},
 					success:function(data) {
 						if(data.result == "success") {
-							alert("like 이용자 저장");
+							location.reload();
 						} else {
-							alert("이용자 저장 실패");
+							alert("좋아요 실패");
 						}
 						
 					},
@@ -155,11 +167,38 @@
 						alert("error");
 					}
 				
-			})
-			
-			
+			});
 			
 		});
+			
+			/*
+			$(".unlikeBtn").on("click", function(e) {
+				e.preventDefault();
+				<%--
+				#태그가 다른곳으로 가지 않게끔 처리
+				--%>
+				
+				var postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"get",
+					url:"/post/unlike",
+					data:{"postId":postId},
+					success:function(data) {
+						if(data.result == "success") {
+							location.reload();
+						} else {
+							alert("좋아요 취소 실패");
+						}
+						
+					},
+					error:function(e) {
+						alert("error");
+					}
+				});
+			
+			});
+			*/
 	});
 	
 	</script>

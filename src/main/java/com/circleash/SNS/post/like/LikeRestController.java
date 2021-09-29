@@ -30,15 +30,36 @@ public class LikeRestController {
 		HttpSession session = request.getSession();
 		int userId = (Integer)session.getAttribute("userId");
 		
-		int count = likeBO.addLike(postId, userId);
+//		int count = likeBO.addLike(postId, userId);
+		
+		boolean isLike = likeBO.addLike(postId, userId);
 		
 		Map<String, String> result = new HashMap<>();
 		
-		if(count == 1) {
+		if(isLike) {
 			result.put("result", "success");
 		} else {
 			result.put("result", "fail");
 		}
 		return result;
 	}
+	
+	@GetMapping("/unlike")
+	public Map<String, String> unlike (
+			@RequestParam("postId") int postId
+			, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		Map<String, String> result = new HashMap<>();
+		int count = likeBO.unlike(postId, userId);
+		
+		if(count == 0) {
+			result.put("result", "fail");
+		} else {
+			result.put("result", "success");
+		}
+		return result;
+	}
+	
 }

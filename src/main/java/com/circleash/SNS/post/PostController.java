@@ -34,7 +34,7 @@ public class PostController {
 		int userId = (Integer)session.getAttribute("userId");
 		String name = (String)session.getAttribute("userName");
 		//객체화 시킨 userId를 쿼리를 통해 확인하고 List형태로 저장해주고
-		List<PostDetail> snsList = postBO.getSnsList();
+		List<PostDetail> snsList = postBO.getSnsList(userId);
 		
 		//jsp에서 사용가능하도록 만들어주는 역할, model에 저장해서 활용
 		//jsp는 모델에서 꺼내쓸수있음
