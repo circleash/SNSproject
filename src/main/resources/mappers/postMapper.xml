@@ -38,6 +38,30 @@
  			`post`
  		ORDER BY `id` DESC
  	</select>
+ 	
+ 	<select id="selectPost" parameterType="int" resultType="com.circleash.SNS.post.model.Post">
+ 		SELECT 
+ 			`id`
+ 			, `userId`
+ 			, `name`
+ 			, `content`
+ 			, `imagePath`
+ 			, `createdAt`
+ 			, `updatedAt`
+		FROM 
+			`post`
+		WHERE
+			`id` = #{id}
+	</select>
+ 	
+ 	<delete id="deletePost" parameterType="map">
+ 		DELETE FROM `post`
+ 		WHERE
+ 			`id` = #{id}
+ 			AND `userId` = #{userId}
+ 	
+ 	
+ 	</delete>
  
  
  </mapper>

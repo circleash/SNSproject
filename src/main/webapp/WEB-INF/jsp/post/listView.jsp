@@ -35,11 +35,13 @@
 							<img src="https://mblogthumb-phinf.pstatic.net/20150203_225/hkjwow_1422965971196EfkMV_JPEG/%C4%AB%C5%E5%C7%C1%BB%E7_31.jpg?type=w210" width="30">		
 							${PostDetail.post.name }
 						</div>
+						<c:if test="${PostDetail.post.userId eq userId }">
 						<div class="more-icon" >
-							<a class="text-dark moreBtn" href="#"> 
+							<a class="text-dark moreBtn" href="#" data-post-id="${PostDetail.post.id }" data-toggle="modal" data-target="#deleteModal"> 
 								<i class="bi bi-three-dots-vertical"></i> 
 							</a>
 						</div>
+						</c:if>
 					</div>
 				<!-- 이미지  -->
 					<div>
@@ -109,6 +111,19 @@
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 	
 	</div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	     
+	      <div class="modal-body text-center">
+	        <a href="#" id="deleteBtn"> 삭제하기 </a>
+	      </div>
+	      
+	    </div>
+	  </div>
+	</div>
 
 </body>
 	<script>
@@ -171,12 +186,9 @@
 			
 		});
 			
-			/*
+			<%--
 			$(".unlikeBtn").on("click", function(e) {
 				e.preventDefault();
-				<%--
-				#태그가 다른곳으로 가지 않게끔 처리
-				--%>
 				
 				var postId = $(this).data("post-id");
 				
@@ -196,10 +208,39 @@
 						alert("error");
 					}
 				});
-			
+			 
 			});
-			*/
-	});
+			--%>
+			$(".moreBtn").on("click", function(e) {
+				e.preventDefault();
+				var postId = $(this).data("post-id");
+				// <a href="#" id="deleteBtn" data-post-id=""></a>
+				$("#deleteBtn").data("post-id", postId);
+			});
+			
+			$("#deleteBtn").on("click", function(e) {
+				e.preventDefault();
+				var postId = $(this).data("post-id");
+				
+				$.ajax({
+					type:"get",
+					url:"/post/delete",
+					data:{"postId":postId},
+					success:function(data) {
+						if(data.result == "success") {
+							location.reload();
+						} else {
+							alert("삭제 실패");
+						}
+					}, 
+					error:function(e) {
+						alert("error");
+					}
+					
+				});
+			});
+			
+		});		
 	
 	</script>
 </html>

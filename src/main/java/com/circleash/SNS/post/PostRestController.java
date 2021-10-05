@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,5 +51,23 @@ public class PostRestController {
 	//클라이언트로부터 userId 등등을 다 받아와서 코멘트를 데이터베이스에 저장하는게 목표.
 	//comment BO DAO 따로 만들어서 해볼것.
 	
+	@GetMapping("/delete")
+	public Map<String, String> delete(
+			@RequestParam("postId") int postId
+			, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		Map<String, String> result = new HashMap<>();
+				
+		if(postBO.deletePost(postId, userId)) {
+			result.put("result", "success");
+		} else {
+			result.put("result", "fail");
+		}
+		
+		return result;
 	
+	}
 }
