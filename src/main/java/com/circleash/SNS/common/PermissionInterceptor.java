@@ -15,7 +15,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 
 	// 요청이 들어 올때
 	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handeler) throws IOException {
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
 		
 		// 로그인 상태에 따른 접근 권한 관리 
 		HttpSession session = request.getSession();
@@ -36,7 +36,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 			// 로그인 화면, 회원가입 
 			// /user/** -> 리스트 페이지
 			if(uri.startsWith("/user")) {
-				response.sendRedirect("/post/timeline");
+				response.sendRedirect("/post/list_view");
 				return false;
 			}
 			
@@ -59,7 +59,7 @@ public class PermissionInterceptor implements HandlerInterceptor {
 	@Override
 	public void afterCompletion(HttpServletRequest request
 			, HttpServletResponse response
-			, Object handeler
+			, Object handler
 			, Exception ex) {
 		
 	}
