@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileManagerService {
 	
 	//수정 될일도 없고 수정 되어서는 안되는 곳에는 final과 변수이름을 대문자로 만든다.
-		public final static String FILE_UPLOAD_PATH ="C:\\Users\\JE\\OneDrive\\바탕 화면\\Marondal\\springTest\\upload\\images/";
+		public final static String FILE_UPLOAD_PATH ="D:\\웹개발 평일 1시_최원제\\springTest\\upload\\images/";
 		//userId를 전달 요청
 		public static String saveFile(int userId, MultipartFile file) {
 			// 파일 경로
@@ -57,7 +57,43 @@ public class FileManagerService {
 			return "/images/" + directoryName + file.getOriginalFilename();
 			
 		}
+		public void removeFile(String filePath) {
+			
+			// 삭제할 파일 경로
+			// filePath : /images/10_21924214/test.png
+			// 실제 파일이 저장된 경로 : D:\\김인규강사\\web\\0415\\spring_test\\upload\\marondalgram\\images\\10_21924214\\test.png
+			
+			
+			String realFilePath = FILE_UPLOAD_PATH + filePath.replace("/images/", "");
+			
+			// 파일지우고
+			Path path = Paths.get(realFilePath);
+			// 해당 파일이 있는지
+			if(Files.exists(path)) {
+				try {
+					Files.delete(path);
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+			}
+			
+			// 디렉토리(폴더) 지우고
+			//D:\\김인규강사\\web\\0415\\spring_test\\upload\\marondalgram\\images\\10_21924214
+			path = path.getParent();
+			
+			if(Files.exists(path)) {
+				try {
+					Files.delete(path);
+				} catch (IOException e) {
+					
+					e.printStackTrace();
+				}
+			}
+		}
 
 	}
+
+
 
 
