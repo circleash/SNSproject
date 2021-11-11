@@ -103,9 +103,6 @@
 				</c:forEach>
 			</div>		
 		</div>
-		<div class="text-right">
-		<a href="/post/create_view" class="btn btn-info">업로드 하러가기</a>
-		</div>
 	</section>
 	
 	<c:import url="/WEB-INF/jsp/include/footer.jsp" />

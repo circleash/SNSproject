@@ -24,10 +24,12 @@
 		<section class="d-flex justify-content-center">
 			<div class="w-75 my-4">
 				<h1 class="text-center">타임라인 업로드</h1>
+				<div class="image-container">
+					    <img style="width: 500px;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=image+preview">
+					    <input style="display: block;" accept="image/*" type="file" id="fileInput">
+				</div>
 				<textarea class="form-control mb-3" rows="5" id="contentInput"></textarea>
 				<!-- MIME text/html image/jpeg -->
-				<a href="#" id="imageUploadBtn"><i class="bi bi-image"></i></a>
-				<input type="file" accept="image/*" id="fileInput" class="d-none">
 				<div class="d-flex justify-content-between my-3">
 					<a href="/post/list_view" class="btn btn-info">타임라인으로</a>
 					<button type="button" class="btn btn-success" id="saveBtn">저장</button>
@@ -57,6 +59,7 @@
 			formData.append("content", content);
 			formData.append("file", $("#fileInput")[0].files[0]);
 			
+			
 			$.ajax({
 				enctype:"multipart/form-data", // 파일 업로드 필수
 				processData:false, //파일업로드 필수
@@ -81,6 +84,27 @@
 			});
 			
 		});
+		
+		function readImage(input) {
+		    // 인풋 태그에 파일이 있는 경우
+		    if(input.files && input.files[0]) {
+		        // 이미지 파일인지 검사 (생략)
+		        // FileReader 인스턴스 생성
+		        const reader = new FileReader()
+		        // 이미지가 로드가 된 경우
+		        reader.onload = e => {
+		            const previewImage = document.getElementById("preview-image")
+		            previewImage.src = e.target.result
+		        }
+		        // reader가 이미지 읽도록 하기
+		        reader.readAsDataURL(input.files[0])
+		    }
+		}
+		// input file에 change 이벤트 부여
+		const inputImage = document.getElementById("fileInput")
+		inputImage.addEventListener("change", e => {
+		    readImage(e.target)
+		})
 	})
 	
 	</script>
